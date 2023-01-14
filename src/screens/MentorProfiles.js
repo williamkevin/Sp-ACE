@@ -14,7 +14,7 @@ const mentorProfiles = () => {
       <Card style={{ width: '18rem' }}>
       <Card.Img variant="top" src={sw3} />
       <Card.Body>
-        <Card.Title>김세원</Card.Title>
+        <Card.Title>김세원ddd</Card.Title>
         <Card.Text>
             서울시립대학교 전자전기컴퓨터공학부
         </Card.Text>
