@@ -5,7 +5,10 @@ class UserCreate(BaseModel):
     username: str
     password1: str
     password2: str
+    college_department : str
+    job : str
     email: EmailStr
+    profile : str | None
 
     @validator('username', 'password1', 'password2', 'email')
     def not_empty(cls, v):
