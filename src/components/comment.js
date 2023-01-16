@@ -2,16 +2,13 @@ import React from 'react';
 import {Comment, Form, Button, Header} from 'semantic-ui-react';
 import moment from "moment"
 
-import sw2 from "./sw2.jpeg"
-// import sw3 from "./sw3.jpeg"
-// import sw4 from "./sw4.jpeg"
-// import sw5 from "./sw5.jpeg"
+import sw3 from "/Users/kevinliam/Desktop/Development/Sp-ACE/src/images/sw.jpeg"
 
 function SingleComment (detail) {
     return(
         <Comment>
         <Comment.Content>
-        <Comment.Avatar as='a' src={sw2}/>
+        <Comment.Avatar as='a' src={sw3}/>
         <Comment.Author as='a'>세원</Comment.Author>
         <Comment.Metadata>
           <div>{detail.info.time}</div>
@@ -36,8 +33,8 @@ class Comments extends React.Component{
     render(){
       console.log(this.state.commentsList)
       return(
-        <Comment.Group style={{marginLeft:"380px"}}>
-            <Header as='h3' dividing>후기</Header>
+        <Comment.Group style={{marginLeft: "100px"}}>
+            <Header as='h3' dividing>채팅</Header>
 
         {this.state.commentsList.map(comments => <SingleComment info ={comments}/>)}
 
@@ -48,7 +45,7 @@ class Comments extends React.Component{
             onChange={(e) => this.setState({inputContent: e.target.value})}
             />
             <Button
-            content='후기 작성'
+            content='보내기'
             labelPosition='left'
             icon='edit'
             secondary
