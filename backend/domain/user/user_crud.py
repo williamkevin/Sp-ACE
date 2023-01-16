@@ -20,3 +20,11 @@ def get_existing_user(db: Session, user_create: UserCreate):
     
 def get_user(db: Session, username: str):
     return db.query(User).filter(User.username == username).first()
+
+def get_mentor_list(db: Session,):
+    _mentor_list_ = []
+    for user in db.query(User).all():
+        print(user.is_mentor)
+        if user.is_mentor == 1:
+            _mentor_list_.append(user)
+    return _mentor_list_

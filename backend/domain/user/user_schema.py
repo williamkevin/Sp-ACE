@@ -9,6 +9,7 @@ class UserCreate(BaseModel):
     job : str
     email: EmailStr
     profile : str | None
+    college_department : str
     is_mentor : int
 
     @validator('username', 'password1', 'password2', 'email')
@@ -35,6 +36,7 @@ class User(BaseModel):
     job : str
     email: EmailStr
     profile : str | None
+    college_department : str
     is_mentor : int
 
     class Config:

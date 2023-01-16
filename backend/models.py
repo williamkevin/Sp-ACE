@@ -55,4 +55,4 @@ class User(Base):
     job = Column(String, nullable=True)
     college_department = Column(String, nullable=True)
     profile = Column(String, nullable=True)
-    is_mentor = Column(Integer, nullable=True)
+    is_mentor = Column(Integer)

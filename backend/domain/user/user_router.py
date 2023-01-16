@@ -9,6 +9,7 @@ from starlette import status
 
 from database import get_db
 from domain.user import user_crud, user_schema
+from domain.user.user_crud import get_mentor_list
 from domain.user.user_crud import pwd_context
 
 ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24
@@ -73,3 +74,8 @@ def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(),
         "token_type": "bearer",
         "username": user.username
     }
+    
+@router.post("/get_mentor_list")
+def get_mentor(db: Session = Depends(get_db)):
+    _mentor_list = get_mentor_list(db)
+    return _mentor_list
