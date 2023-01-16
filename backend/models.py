@@ -52,3 +52,7 @@ class User(Base):
     username = Column(String, unique=True, nullable=False)
     password = Column(String, nullable=False)
     email = Column(String, unique=True, nullable=False)
+    job = Column(String, nullable=True)
+    college_department = Column(String, nullable=True)
+    profile = Column(String, nullable=True)
+    is_mentor = Column(Integer, nullable=True)
