@@ -5,10 +5,7 @@ class UserCreate(BaseModel):
     username: str
     password1: str
     password2: str
-    college_department : str
-    job : str
     email: EmailStr
-    profile : str | None
 
     @validator('username', 'password1', 'password2', 'email')
     def not_empty(cls, v):
@@ -31,9 +28,6 @@ class User(BaseModel):
     id: int
     username: str
     email: str
-    job : str
-    college_department : str
-    profile : str | None
 
     class Config:
         orm_mode = True
