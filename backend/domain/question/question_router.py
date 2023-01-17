@@ -23,7 +23,7 @@ def question_list(db: Session = Depends(get_db),
         'question_list': _question_list
     }
 
-@router.get("/detail/{question_id}", response_model=question_schema.Question)
+@router.get("/detail/{question_id}", response_model=question_schema.Question)  # 질문 찾아서 반환
 def question_detail(question_id: int, db: Session = Depends(get_db)):
     question = question_crud.get_question(db, question_id=question_id)
     return question
@@ -32,7 +32,7 @@ def question_detail(question_id: int, db: Session = Depends(get_db)):
 @router.post("/create", status_code=status.HTTP_204_NO_CONTENT)
 def question_create(_question_create: question_schema.QuestionCreate,
                     db: Session = Depends(get_db),
-                    current_user: User = Depends(get_current_user)):
+                    current_user: User = Depends(get_current_user)):  # --> 유저 권한이 있는지 확인하는 코드
     question_crud.create_question(db=db, question_create=_question_create,
                                   user=current_user)
 
