@@ -1,0 +1,6 @@
+.firebase
+.github
+.firebase.json
+
+node_modules/
+.firebasec/
