@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 03fcca2c1ae8
+Revision ID: 16e4990dd9dd
 Revises: 
-Create Date: 2023-01-16 14:14:17.184632
+Create Date: 2023-01-18 14:54:31.769355
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '03fcca2c1ae8'
+revision = '16e4990dd9dd'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -26,7 +26,7 @@ def upgrade() -> None:
     sa.Column('job', sa.String(), nullable=True),
     sa.Column('college_department', sa.String(), nullable=True),
     sa.Column('profile', sa.String(), nullable=True),
-    sa.Column('is_mentor', sa.Integer(), nullable=True),
+    sa.Column('is_mentor', sa.Integer(), nullable=False),
     sa.PrimaryKeyConstraint('id', name=op.f('pk_user')),
     sa.UniqueConstraint('email', name=op.f('uq_user_email')),
     sa.UniqueConstraint('username', name=op.f('uq_user_username'))
@@ -38,6 +38,8 @@ def upgrade() -> None:
     sa.Column('create_date', sa.DateTime(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('modify_date', sa.DateTime(), nullable=True),
+    sa.Column('question_to_mentor', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['question_to_mentor'], ['user.id'], name=op.f('fk_question_question_to_mentor_user')),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], name=op.f('fk_question_user_id_user')),
     sa.PrimaryKeyConstraint('id', name=op.f('pk_question'))
     )

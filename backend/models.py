@@ -19,9 +19,12 @@ class Question(Base):
     content = Column(Text, nullable=False)
     create_date = Column(DateTime, nullable=False)
     user_id = Column(Integer, ForeignKey("user.id"), nullable=True)
-    user = relationship("User", backref="question_users")
+    user = relationship("User",foreign_keys = [user_id], backref="question_users")
     modify_date = Column(DateTime, nullable=True)
     voter = relationship('User', secondary=question_voter, backref='question_voters')
+    question_to_mentor = Column(Integer, ForeignKey("user.id"), nullable = True) # null 일시 모두가 볼수있는 질문, Null이 아닐시 멘토만 조회가능
+    user_mentor = relationship('User',foreign_keys = [question_to_mentor] , backref = 'question_to_mentor')
+    
 
     
 answer_voter = Table(
@@ -55,4 +58,4 @@ class User(Base):
     job = Column(String, nullable=True)
     college_department = Column(String, nullable=True)
     profile = Column(String, nullable=True)
-    is_mentor = Column(Integer)
+    is_mentor = Column(Integer, nullable = False)  # 멘토일시 1 멘티일시 0

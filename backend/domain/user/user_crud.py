@@ -1,3 +1,4 @@
+import profile
 from sqlalchemy.orm import Session
 from domain.user.user_schema import UserCreate
 from models import User
@@ -8,7 +9,12 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 def create_user(db: Session, user_create: UserCreate):
     db_user = User(username=user_create.username,
                    password=pwd_context.hash(user_create.password1),
-                   email=user_create.email)
+                   email=user_create.email,
+                   job = user_create.job,
+                   profile = user_create.profile,
+                   college_department = user_create.college_department,
+                   is_mentor = user_create.is_mentor
+                   )
     db.add(db_user)
     db.commit()
     
@@ -24,7 +30,6 @@ def get_user(db: Session, username: str):
 def get_mentor_list(db: Session,):
     _mentor_list_ = []
     for user in db.query(User).all():
-        print(user.is_mentor)
         if user.is_mentor == 1:
             _mentor_list_.append(user)
     return _mentor_list_

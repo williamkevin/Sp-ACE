@@ -1,3 +1,4 @@
+from anyio import current_effective_deadline
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from starlette import status
@@ -13,11 +14,39 @@ router = APIRouter(
 )
 
 
-@router.get("/list", response_model=question_schema.QuestionList)
+@router.get("/list", response_model=question_schema.QuestionList)  # 10개마다 질문 리스트 가졍괴
 def question_list(db: Session = Depends(get_db),
                   page: int = 0, size: int = 10):
     total, _question_list = question_crud.get_question_list(
         db, skip=page*size, limit=size)
+    return {
+        'total': total,
+        'question_list': _question_list
+    }
+    
+@router.get("/{user_id}/mentee_question_list", response_model=question_schema.QuestionList)  # 10개마다 질문 리스트 가져오고
+def mentee_question_list(db: Session = Depends(get_db),   # 멘티들의 질문 리스트 가져오기
+                  page: int = 0, size: int = 10,
+                  current_user: User = Depends(get_current_user)):
+    
+    user_id =  current_user.id
+    total, _question_list = question_crud.get_mentee_question_list(
+        db, User_id=user_id,skip=page*size, limit=size)
+
+    return {
+        'total': total,
+        'question_list': _question_list
+    }
+    
+@router.get("/{user_id}/mentor_question_list", response_model=question_schema.QuestionList)  # 10개마다 질문 리스트 가졍괴
+def mentee_question_list(db: Session = Depends(get_db),  # 멘토들이 받을 질문리스트 가져오기
+                  page: int = 0, size: int = 10,
+                  current_user: User = Depends(get_current_user)):
+    
+    user_id =  current_user.id
+    total, _question_list = question_crud.get_mentor_question_list(
+        db, User_id=user_id,skip=page*size, limit=size)
+
     return {
         'total': total,
         'question_list': _question_list
@@ -27,6 +56,7 @@ def question_list(db: Session = Depends(get_db),
 def question_detail(question_id: int, db: Session = Depends(get_db)):
     question = question_crud.get_question(db, question_id=question_id)
     return question
+
 
 
 @router.post("/create", status_code=status.HTTP_204_NO_CONTENT)

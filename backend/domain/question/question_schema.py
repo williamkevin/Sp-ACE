@@ -15,6 +15,7 @@ class Question(BaseModel):
     user: User | None
     modify_date: datetime.datetime | None = None
     voter: list[User] = []
+    question_to_mentor:int | None = None
 
     class Config:
         orm_mode = True
@@ -23,6 +24,7 @@ class Question(BaseModel):
 class QuestionCreate(BaseModel):
     subject: str
     content: str
+    question_to_mentor: int | None = None
 
     @validator('subject', 'content')
     def not_empty(cls, v):
