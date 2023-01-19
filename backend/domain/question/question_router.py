@@ -46,7 +46,6 @@ def mentee_question_list(db: Session = Depends(get_db),  # 멘토들이 받을 �
     user_id =  current_user.id
     total, _question_list = question_crud.get_mentor_question_list(
         db, User_id=user_id,skip=page*size, limit=size)
-
     return {
         'total': total,
         'question_list': _question_list

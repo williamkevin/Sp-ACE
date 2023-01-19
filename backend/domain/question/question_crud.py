@@ -38,7 +38,7 @@ def get_mentor_question_list( db: Session, User_id: int, skip: int = 0, limit: i
         if question.question_to_mentor != User_id:  ## 질문자와 로그인한 id의 값이 같은지 확인
             del_list.append(question)
     for i in range(len(del_list)):
-        question_list.remove(del_list[i])
+        question_list.remove(del_list[i])  #
     total = len(question_list)
     return total, question_list  # (전체 건수, 페이징 적용된 질문 목록)
 
