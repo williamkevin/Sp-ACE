@@ -13,8 +13,7 @@ class Question(BaseModel):
     create_date: datetime.datetime
     answers: list[Answer] = []   # 이걸로 답변 개수 뽑을거야
     user: User | None
-    modify_date: datetime.datetime | None
-    = None
+    modify_date: datetime.datetime | None = None
     voter: list[User] = []
     question_to_mentor:int | None = None
 

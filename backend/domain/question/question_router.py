@@ -1,4 +1,3 @@
-from anyio import current_effective_deadline
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from starlette import status
@@ -16,7 +15,12 @@ router = APIRouter(
 
 @router.get("/list", response_model=question_schema.QuestionList)  # 10개마다 질문 리스트 가졍괴
 def question_list(db: Session = Depends(get_db),
-                  page: int = 0, size: int = 10):
+                  page: int = 0, size: int = 10,
+                  current_user: User = Depends(get_current_user)):
+    if current_user.admin == 0:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail="관리자 권한이 없습니다.")
+    
     total, _question_list = question_crud.get_question_list(
         db, skip=page*size, limit=size)
     return {
@@ -39,7 +43,7 @@ def mentee_question_list(db: Session = Depends(get_db),   # 멘티들의 질문 
     }
     
 @router.get("/{user_id}/mentor_question_list", response_model=question_schema.QuestionList)  # 10개마다 질문 리스트 가졍괴
-def mentee_question_list(db: Session = Depends(get_db),  # 멘토들이 받을 질문리스트 가져오기
+def mentor_question_list(db: Session = Depends(get_db),  # 멘토들이 받을 질문리스트 가져오기
                   page: int = 0, size: int = 10,
                   current_user: User = Depends(get_current_user)):
     

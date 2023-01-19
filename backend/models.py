@@ -59,3 +59,5 @@ class User(Base):
     college_department = Column(String, nullable=True)
     profile = Column(String, nullable=True)
     is_mentor = Column(Integer, nullable = False)  # 멘토일시 1 멘티일시 0
+    admin = Column(Integer , nullable = True) # 관리자 계정일시 1, 일반유저일시 0 이건 데이터베이스에서 관리할 것
+    point = Column(Integer, nullable = True) #데이터 베이스로 다룰 예정

@@ -13,7 +13,8 @@ def create_user(db: Session, user_create: UserCreate):
                    job = user_create.job,
                    profile = user_create.profile,
                    college_department = user_create.college_department,
-                   is_mentor = user_create.is_mentor
+                   is_mentor = user_create.is_mentor,
+                   admin = 0
                    )
     db.add(db_user)
     db.commit()
