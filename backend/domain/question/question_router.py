@@ -86,6 +86,18 @@ def question_update(_question_update: question_schema.QuestionUpdate,
     question_crud.update_question(db=db, db_question=db_question,
                                   question_update=_question_update)
 
+@router.put("/evaluation", status_code=status.HTTP_204_NO_CONTENT)
+def question_eval(_question_eval: question_schema.QuestionEvaluation,
+                    db: Session = Depends(get_db),
+                    current_user: User = Depends(get_current_user)):
+    db_question = question_crud.get_question(db, question_id=_question_eval.question_id)
+    if not db_question:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail="데이터를 찾을수 없습니다.")
+
+    question_crud.eval_question(db=db, db_question=db_question,
+                                  question_eval=_question_eval)
+
 @router.delete("/delete", status_code=status.HTTP_204_NO_CONTENT)
 def question_delete(_question_delete: question_schema.QuestionDelete,
                     db: Session = Depends(get_db),

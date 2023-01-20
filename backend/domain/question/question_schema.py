@@ -16,7 +16,7 @@ class Question(BaseModel):
     modify_date: datetime.datetime | None = None
     voter: list[User] = []
     question_to_mentor:int | None = None
-    evaluation: int | None = None
+    evaluation: int | None = None  #상중하 321, 안하면 None값
     
 
     class Config:
@@ -45,3 +45,7 @@ class QuestionDelete(BaseModel):
 
 class QuestionVote(BaseModel):
     question_id: int
+    
+class QuestionEvaluation(BaseModel):
+    question_id: int
+    evaluation: int  

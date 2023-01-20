@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from domain.question.question_schema import QuestionCreate, QuestionUpdate
+from domain.question.question_schema import QuestionCreate, QuestionUpdate, QuestionEvaluation
 from models import Question, User
 from sqlalchemy.orm import Session
 
@@ -56,6 +56,11 @@ def create_question(db: Session, question_create: QuestionCreate, user: User):
                            
                            )
 
+    db.add(db_question)
+    db.commit()
+
+def eval_question(db: Session, db_question: Question, question_eval: QuestionEvaluation):
+    db_question.evaluation = question_eval.evaluation
     db.add(db_question)
     db.commit()
 
