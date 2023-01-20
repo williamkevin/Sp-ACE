@@ -16,6 +16,8 @@ class Question(BaseModel):
     modify_date: datetime.datetime | None = None
     voter: list[User] = []
     question_to_mentor:int | None = None
+    evaluation: int | None = None
+    
 
     class Config:
         orm_mode = True

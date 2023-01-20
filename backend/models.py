@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Table
+from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Table, null
 from sqlalchemy.orm import relationship
 
 from database import Base
@@ -24,6 +24,7 @@ class Question(Base):
     voter = relationship('User', secondary=question_voter, backref='question_voters')
     question_to_mentor = Column(Integer, ForeignKey("user.id"), nullable = True) # null 일시 모두가 볼수있는 질문, Null이 아닐시 멘토만 조회가능
     user_mentor = relationship('User',foreign_keys = [question_to_mentor] , backref = 'question_to_mentor')
+    evaluation = Column(Integer, nullable = True)
     
 
     
@@ -60,4 +61,6 @@ class User(Base):
     profile = Column(String, nullable=True)
     is_mentor = Column(Integer, nullable = False)  # 멘토일시 1 멘티일시 0
     admin = Column(Integer , nullable = True) # 관리자 계정일시 1, 일반유저일시 0 이건 데이터베이스에서 관리할 것
-    point = Column(Integer, nullable = True) #데이터 베이스로 다룰 예정
+    point = Column(Integer, nullable = True) #데이터 베이스로 다룰 예정  더미데이터 
+    question_authority = Column(Integer, nullable = True) # 멘티의 질문권한 돈내면 질문 가능
+    

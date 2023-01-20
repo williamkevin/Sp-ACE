@@ -66,6 +66,9 @@ def question_detail(question_id: int, db: Session = Depends(get_db)):
 def question_create(_question_create: question_schema.QuestionCreate,
                     db: Session = Depends(get_db),
                     current_user: User = Depends(get_current_user)):  # --> 유저 권한이 있는지 확인하는 코드
+    if (current_user.question_authority == None) or (current_user.question_authority == 0):
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail="질문 권한이 없습니다. 관리자에게 문의하세요.")
     question_crud.create_question(db=db, question_create=_question_create,
                                   user=current_user)
 
