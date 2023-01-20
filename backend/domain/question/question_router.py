@@ -86,7 +86,7 @@ def question_update(_question_update: question_schema.QuestionUpdate,
     question_crud.update_question(db=db, db_question=db_question,
                                   question_update=_question_update)
 
-@router.put("/evaluation", status_code=status.HTTP_204_NO_CONTENT)
+@router.put("/evaluation", status_code=status.HTTP_204_NO_CONTENT) #평가 해서 321값(상중하)를 데이터 베이스로 전달
 def question_eval(_question_eval: question_schema.QuestionEvaluation,
                     db: Session = Depends(get_db),
                     current_user: User = Depends(get_current_user)):

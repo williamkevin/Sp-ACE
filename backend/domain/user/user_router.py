@@ -7,6 +7,7 @@ from jose import jwt, JWTError
 from sqlalchemy.orm import Session
 from starlette import status
 
+from models import User
 from database import get_db
 from domain.user import user_crud, user_schema
 from domain.user.user_crud import get_mentor_list
@@ -75,7 +76,12 @@ def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(),
         "username": user.username
     }
     
-@router.post("/get_mentor_list")
+@router.get("/get_mentor_list")
 def get_mentor(db: Session = Depends(get_db)):
     _mentor_list = get_mentor_list(db)
     return _mentor_list
+
+@router.get("/get_user_status")
+def get_mentor(db: Session = Depends(get_db),
+               current_user: User = Depends(get_current_user)):
+    return current_user
