@@ -1,4 +1,6 @@
-alembic 초기화
+
+# alembic 초기화
+
 alembic이 잘 설치되었다면 이제 alembic 초기화 작업을 진행해야 한다. 파이참 터미널에서 다음과 같은 명령을 실행하자.
 
 [파이참 터미널]
@@ -31,10 +33,15 @@ alembic이 사용할 데이터베이스의 접속주소를 설정했다.
 (... 생략 ...)
 import models
 (... 생략 ...)
+
 # add your model's MetaData object here
+
 # for 'autogenerate' support
+
 # from myapp import mymodel
+
 # target_metadata = mymodel.Base.metadata
+
 target_metadata = models.Base.metadata
 (... 생략 ...)
 리비전 파일 생성하기

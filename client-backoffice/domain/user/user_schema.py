@@ -11,7 +11,6 @@ class UserCreate(BaseModel):
     profile : str | None
     college_department : str
     is_mentor : int
-    # nickname: str
     admin : int = 0
     question_authority : int = 0
 
@@ -26,12 +25,14 @@ class UserCreate(BaseModel):
         if 'password1' in values and v != values['password1']:
             raise ValueError('비밀번호가 일치하지 않습니다')
         return v
-    
+
+
 class Token(BaseModel):
     access_token: str
     token_type: str
     username: str
-    
+
+
 class User(BaseModel):
     id: int
     username: str

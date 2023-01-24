@@ -42,8 +42,8 @@ def get_current_user(token: str = Depends(oauth2_scheme),
             raise credentials_exception
         return user
 
-# 회원가입한 내용을 디비에 보내는 것까지 역할 
-@router.post("/create", status_code=status.HTTP_204_NO_CONTENT)
+# 회원가입한 내용을 디비에 보내는 것까지 역할 #############################################################
+@router.post("/signup", status_code=status.HTTP_204_NO_CONTENT)
 def user_create(_user_create: user_schema.UserCreate, db: Session = Depends(get_db)):
     user = user_crud.get_existing_user(db, user_create=_user_create)
     if user:
@@ -89,44 +89,3 @@ def get_mentor(db: Session = Depends(get_db)):
 def get_mentor(db: Session = Depends(get_db),
                current_user: User = Depends(get_current_user)):
     return current_user
-
-
-# 세원
-# from fastapi.responses import HTMLResponse
-# from fastapi import FastAPI, Request
-# from fastapi.responses import HTMLResponse
-# from fastapi.templating import Jinja2Templates
-# from pydantic import BaseModel
-# import logging
-# import requests
-
-
-# templates = Jinja2Templates(directory="templates")
-
-
-# @app.get('/cities', response_class=HTMLResponse)
-# def get_signup(request: Request):
-#     # logging.basicConfig(level='DEBUG')
-#     # logging.debug('start~0')
-#     context = {}
-#     rsCity = []
-#     cnt = 0
-#     db = []
-
-#     headers = {"user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36"}
-#     for city in db:
-#         strs = f"http://worldtimeapi.org/api/timezone/{city['timezone']}"
-
-#         r = requests.get(strs, headers=headers)
-
-#         cur_time = r.json()['datetime']
-#         cnt += 1
-
-#         rsCity.append( {"id": cnt, 'name': city['name'], 'timezone': city['timezone'], 'current_time': cur_time } )
-
-#         # logging.debug(db)
-
-#     context['request'] = request
-#     context['rsCity'] = rsCity
-
-#     return templates.TemplateResponse("city_list.html", context)

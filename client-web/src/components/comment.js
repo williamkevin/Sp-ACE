@@ -40,8 +40,8 @@ class Comments extends React.Component{
 
         <Form reply>
             <Form.TextArea
-            value={this.state.inputContent} 
             placeholder="후기를 남겨주세요"
+            value={this.state.inputContent} 
             onChange={(e) => this.setState({inputContent: e.target.value})}
             />
             <Button
