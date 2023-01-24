@@ -2,7 +2,7 @@ import React from 'react';
 import {Comment, Form, Button, Header} from 'semantic-ui-react';
 import moment from "moment"
 
-import sw3 from "/Users/kevinliam/Desktop/Development/Sp-ACE/src/images/sw.jpeg"
+import sw3 from "/Users/kevinliam/Desktop/Development/Sp-ACE/client-web/src/images/sw.jpeg"
 
 function SingleComment (detail) {
     return(
