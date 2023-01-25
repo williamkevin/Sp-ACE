@@ -86,6 +86,6 @@ def get_mentor(db: Session = Depends(get_db)):
 
 
 @router.get("/get_user_status")
-def get_mentor(db: Session = Depends(get_db),
+def get_user_status(db: Session = Depends(get_db),
                current_user: User = Depends(get_current_user)):
     return current_user
