@@ -5,7 +5,6 @@ class UserCreate(BaseModel):
     username: str
     password1: str
     password2: str
-    email: EmailStr
     job : str
     email: EmailStr
     profile : str | None
@@ -36,7 +35,6 @@ class Token(BaseModel):
 class User(BaseModel):
     id: int
     username: str
-    email: str
     job : str
     email: EmailStr
     profile : str | None
